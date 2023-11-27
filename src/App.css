@@ -24,6 +24,14 @@ body {
 	overflow: hidden;
 }
 
+#city-selector {
+	margin-left: 15px;
+}
+
+#select-box {
+	margin: 10px;
+}
+
 .header {
 	display: flex;
 	align-items: center;

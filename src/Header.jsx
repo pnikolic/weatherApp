@@ -61,6 +61,14 @@ function Header(props) {
 		icons[0] = 'src/icons/night.svg';
 		icons[1] = 'src/icons/cloudy-night-2.svg';
 		icons[2] = 'src/icons/cloudy-night-2.svg';
+		icons[3] = 'src/icons/cloudy-night-2.svg';
+		icons[45] = 'src/icons/cloudy-night-2.svg';
+	} else {
+		icons[0] = 'src/icons/day.svg';
+		icons[1] = 'src/icons/cloudy.svg';
+		icons[2] = 'src/icons/cloudy.svg';
+		icons[3] = 'src/icons/cloudy.svg';
+		icons[45] = 'src/icons/cloudy.svg';
 	}
 
 	// Need to do sunrise
@@ -75,7 +83,7 @@ function Header(props) {
 					<span>{props.currenttemp}</span>&deg;
 					{/* <span datacurrenttemp="true">13</span>&deg; */}
 				</div>
-				<p id="location-city">Location</p> {/* Need to get city location dynamically */}
+				<p id="location-city">{props.location}</p> {/* Need to get city location dynamically */}
 			</div>
 
 			<div className='header-right'>
