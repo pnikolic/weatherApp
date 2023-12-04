@@ -23,9 +23,9 @@ function Header(props) {
 		0: 	'src/icons/day.svg',			
 		1: 	'src/icons/cloudy-day-2.svg',
 		2: 	'src/icons/cloudy-day-2.svg',
-		3: 	'src/icons/cloudy.svg',
-		45: 'src/icons/cloudy.svg',
-		48:	'src/icons/cloudy.svg',
+		3: 	'src/icons/cloudy-day-2.svg',
+		45: 'src/icons/fog.svg',
+		48:	'src/icons/fog.svg',
 		51: 'src/icons/rainy-5.svg',
 		53: 'src/icons/rainy-5.svg',
 		55: 'src/icons/rainy-5.svg',
@@ -57,19 +57,32 @@ function Header(props) {
 	const sunset_hour 	= props.sunset[0] + props.sunset[1];
 	const sunset_min 	= props.sunset[3] + props.sunset[4];
 	
-	if((current_hour >= sunset_hour) && (current_min >= sunset_min)) {
+	console.log("Prop sunset: ", props.sunset);
+	console.log("Prop sunset[0]: ", props.sunset[0]);
+	console.log("Prop sunset[1]: ", props.sunset[1]);
+	console.log("Prop sunset[2]: ", props.sunset[2]);
+	console.log("Prop sunset[3]: ", props.sunset[3]);
+	console.log("Prop sunset[4]: ", props.sunset[4]);
+
+	console.log("Sunset hour: ", sunset_hour, "Sunset min: ", sunset_min);
+	
+	console.log("current hour: ", current_hour, "current min: ", current_min);
+
+	if( (current_hour >= Number(sunset_hour)) && (current_min >= Number(sunset_min)) ) {
 		icons[0] = 'src/icons/night.svg';
 		icons[1] = 'src/icons/cloudy-night-2.svg';
 		icons[2] = 'src/icons/cloudy-night-2.svg';
 		icons[3] = 'src/icons/cloudy-night-2.svg';
-		icons[45] = 'src/icons/cloudy-night-2.svg';
+		icons[45] = 'src/icons/fog-night.svg';
 	} else {
 		icons[0] = 'src/icons/day.svg';
-		icons[1] = 'src/icons/cloudy.svg';
-		icons[2] = 'src/icons/cloudy.svg';
+		icons[1] = 'src/icons/cloudy-day-2.svg';
+		icons[2] = 'src/icons/cloudy-day-2.svg';
 		icons[3] = 'src/icons/cloudy.svg';
-		icons[45] = 'src/icons/cloudy.svg';
+		icons[45] = 'src/icons/fog.svg';
 	}
+
+	console.log("weather code: ", props.iconCode);
 
 	// Need to do sunrise
 
@@ -83,7 +96,8 @@ function Header(props) {
 					<span>{props.currenttemp}</span>&deg;
 					{/* <span datacurrenttemp="true">13</span>&deg; */}
 				</div>
-				<p id="location-city">{props.location}</p> {/* Need to get city location dynamically */}
+				<p id="location-city">{props.location}</p>
+				{/* Need to get city location dynamically */}
 			</div>
 
 			<div className='header-right'>
@@ -123,7 +137,7 @@ function Header(props) {
 					<div>
 						<span>{props.sunset}</span>
 						{/* <span datasunset="true">18:14</span> */}
-						<span className='value-sub-info'></span>
+						<span className='value-sub-info'><br></br>(local time)</span>
 					</div>
 				</div>
 			</div>

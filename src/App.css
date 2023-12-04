@@ -30,6 +30,7 @@ body {
 
 #select-box {
 	margin: 10px;
+	width: auto;
 }
 
 .header {

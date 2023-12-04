@@ -1,106 +1,142 @@
 {
+	"Abuja": {
+		"lat": 9.0244164, 
+		"lon": 7.367465,
+		"tz": "Africa/Lagos"
+	},
+	"Lagos": {
+		"lat": 6.5244,
+		"lon": 3.3792,
+		"tz": "Africa/Lagos"
+	},
 	"Vancouver": {
 		"lat": 49.2578182,
-		"lon": -123.2063052
+		"lon": -123.2063052,
+		"tz": "America/Vancouver"
 	},
 	"Montreal": {
 		"lat": 45.5591895,
-		"lon": -74.0415272
+		"lon": -74.0415272,
+		"tz": "America/Montreal"
 	},
 	"New York": {
 		"lat": 40.6975399,
-		"lon": -74.3093402
+		"lon": -74.3093402,
+		"tz": "America/New_York"
 	},
 	"Chicago": {
 		"lat": 41.8337734,
-		"lon": -88.0616219
+		"lon": -88.0616219,
+		"tz": "America/Chicago"
 	},
 	"Grand Rapids": {
 		"lat": 42.9564545,
-		"lon": -85.7424907
+		"lon": -85.7424907,
+		"tz": "America/Detroit"
 	},
 	"Seattle": {
 		"lat": 47.6131554,
-		"lon": -122.5068749
+		"lon": -122.5068749,
+		"tz": "America/Vancouver"
 	},
 	"San Francisco": {
 		"lat": 37.757807,
-		"lon": -122.520002
+		"lon": -122.520002,
+		"tz": "America/Los_Angeles"
 	},
 	"Los Angeles": {
 		"lat": 34.0206084,
-		"lon": -118.7413982
+		"lon": -118.7413982,
+		"tz": "America/Los_Angeles"
 	},
 	"San Diego": {
 		"lat": 32.8246976,
-		"lon": -117.4386452
+		"lon": -117.4386452,
+		"tz": "America/Los_Angeles"
 	},
 	"Austin": {
 		"lat": 30.3079406,
-		"lon": -98.0854113
+		"lon": -98.0854113,
+		"tz": "America/Chicago"
 	},
 	"Miami": {
 		"lat": 25.7825389,
-		"lon": -80.311861
+		"lon": -80.311861,
+		"tz": "America/New_York"
 	},
 	"Mexico City": {
 		"lat": 19.3910844,
-		"lon": -99.4732887
+		"lon": -99.4732887,
+		"tz": "America/Mexico_City"
 	},
 	"Cancún": {
 		"lat": 21.1215385,
-		"lon": -86.9388066
+		"lon": -86.9388066,
+		"tz": "America/Cancun"
 	},
 	"Manaus": {
 		"lat": -3.1303628,
-		"lon": -60.226678
+		"lon": -60.226678,
+		"tz": "America/Manaus"
 	},
 	"Belo Horizonte": {
 		"lat": -19.9023176,
-		"lon": -44.1288657
+		"lon": -44.1288657,
+		"tz": "America/Sao_Paulo"
 	},
 	"Florianópolis": {
 		"lat": -27.5705975,
-		"lon": -48.7999465
+		"lon": -48.7999465,
+		"tz": "America/Sao_Paulo"
 	},
 	"Porto": {
 		"lat": 41.1622428,
-		"lon": -8.7043554
+		"lon": -8.7043554,
+		"tz": "Europe/Lisbon"
 	},
 	"Lisbon": {
 		"lat": 38.7441844,
-		"lon": -9.2421377
+		"lon": -9.2421377,
+		"tz": "Europe/Lisbon"
 	},
 	"Madrid": {
 		"lat": 40.4380986,
-		"lon": -3.844349
+		"lon": -3.844349,
+		"tz": "Europe/Madrid"
 	},
 	"Barcelona": {
 		"lat": 41.3927673,
-		"lon": 2.0577873
+		"lon": 2.0577873,
+		"tz": "Europe/Madrid"
 	},
 	"Paris": {
 		"lat": 48.8589384,
-		"lon": 2.2646337
+		"lon": 2.2646337,
+		"tz": "Europe/Paris"
 	},
 	"Berlin": {
 		"lat": 52.5017902,
-		"lon": 12.2425088
+		"lon": 12.2425088,
+		"tz": "Europe/Berlin"
 	},
 	"New Delhi": {
 		"lat": 28.5273345,
-		"lon": 76.9136141
+		"lon": 76.9136141,
+		"tz": "Asia/Kolkata"
 	},
 	"Mumbai": {
 		"lat": 19.0823401,
-		"lon": 72.5858065
+		"lon": 72.5858065,
+		"tz": "Asia/Kolkata"
 	},
 	"Honolulu": {
 		"lat": 21.3276413,
-		"lon": -158.3900731
+		"lon": -158.3900731,
+		"tz": "Pacific/Honolulu"
 	},
 	"Auckland": {
 		"lat": 21.3276413,
-		"lon": -158.3900731
+		"lon": -158.3900731,
+		"tz": "Pacific/Auckland"
 	}
 }

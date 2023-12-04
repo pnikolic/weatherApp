@@ -37,10 +37,13 @@ function parseCurrentWeather({ current, daily }) {
 		uv_index_max: [uv],
 	} = daily;
 
+	const sunset_date_local = sunset;
 	const sunset_date = new Date(sunset * 1000);
+	
+	console.log("Sunset, local time: ", new Date(sunset*1000).toLocaleString("en-US", {timeZone: "Africa/Lagos"}));
 
 	console.log("sunset_date: ", sunset_date)
-	console.log("date", new Date().getHours())
+	console.log("My Hour: ", new Date().getHours())
 
 	let hour   = sunset_date.getHours();
 	let minute = sunset_date.getMinutes();
@@ -51,6 +54,7 @@ function parseCurrentWeather({ current, daily }) {
 	if(minute < 10)
 		minute = '0' + minute.toString();
 
+	// const sunset_time_local = hour.toString() + ':' + minute.toString();
 	const sunset_time = hour.toString() + ':' + minute.toString();
 
 	return {
