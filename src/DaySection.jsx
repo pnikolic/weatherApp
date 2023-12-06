@@ -1,4 +1,4 @@
-function DaySection() {
+function DaySection(props) {
 
 	return (
 		<section className="day-section">

@@ -80,6 +80,11 @@ body {
 	text-align: center;
 }
 
+#local-time {
+	font-size: 0.8rem;
+	margin-top: -0.8rem;
+}
+
 .header-right {
 	display: grid;
 	width: 60%;

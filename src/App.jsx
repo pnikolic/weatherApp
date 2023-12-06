@@ -5,6 +5,7 @@ import DaySection from './DaySection'
 import HourSection from './HourSection'
 import { getWeather } from './weather'
 import cities from './data.json'
+import { all } from 'axios'
 // import cities from './data_sample.json'
 
 // Default location - Abuja, Nigeria
@@ -33,16 +34,15 @@ const longitude = cities["Abuja"].lon; //myLocation.lon;
 // 	}, error
 // );
 
-
-
-
 function App() {
 
 	const keys_cities = Object.keys(cities);
 	const options = []; // options for select html element at top of page
 
-	const [city, setCity] = useState('Select location');
-	const [all_data, setAll_data] = useState({
+	const [city, setCity] 			= useState('Select location');
+	const [localTime, setLocalTime] = useState('--:--');
+	const [timezone, setTimezone] 	= useState('America/Los_Angeles');
+	const [all_data, setAll_data] 	= useState({
 		current: {
 			currentTemp: "--",
 			highTemp: "--",
@@ -60,11 +60,10 @@ function App() {
 			return "0";
  		} else {
 			console.log("The RESOLVE sunset TIME: ", currentSunset);
-			const idx_colon = currentSunset.indexOf(':');
-			let idx = 1;
-			let hours = "";
-			let minutes = "";
-			let date_new = new Date()
+			let idx 	 = 1;
+			let hours 	 = "";
+			let minutes  = "";
+			let date_new = new Date();
 		
 			for(let i = 0; i < currentSunset.length; i++) {
 				if(currentSunset[i] == ":") {
@@ -77,22 +76,20 @@ function App() {
 					hours += currentSunset[i];
 				}
 			}
-		
-			console.log("HOURS: ", hours)
-			console.log("MINUTES: ", minutes)
 			
 			date_new.setHours(hours);
 			date_new.setMinutes(minutes);
 
 			const value = new Intl.DateTimeFormat('en-US', {hour: "numeric", minute: "numeric", timeZone: tz}).format(date_new); 
-
-			console.log("VALUE: ", value.substring(0, value.length-3));
+			// console.log("VALUE: ", value.substring(0, value.length-3));
 			return value;
 		}
 	}
 
 	function getLocation(lat, lon, tz) {
-		getWeather(lat, lon, tz /*Intl.DateTimeFormat().resolvedOptions().timeZone*/ )
+		const locationTime = new Intl.DateTimeFormat('en-US', {hour: "numeric", minute: "numeric", timeZone: tz}).format(new Date());
+		
+		getWeather(lat, lon, tz) /* Intl.DateTimeFormat().resolvedOptions().timeZone */ 
 		.then((res) => {
 			res.current.sunset = setSunsetToLocale(res.current.sunset, tz)
 			setAll_data(res);
@@ -101,6 +98,9 @@ function App() {
 			console.error(e);
 			alert("Error getting weather.");
 		});
+
+		setTimezone(tz);
+		setLocalTime(locationTime);
 	}
 
 	// Add options to select tag from "data_sample.json" AKA "cities"
@@ -112,34 +112,34 @@ function App() {
 		);
 	});
 
-	// console.log("Keys: ", Object.keys(cities));
-
 	useEffect(() => {
 		getLocation(latitude, longitude, cities["Abuja"].tz);
 		setCity('Abuja');
 	}, []);
 
-
 	return (
 		<>
 			<div id='city-selector'>
-				<p style={{fontSize: "12px", color: "blue"}}>*Location coordinates are approximate 
+				<p style={{fontSize: "11px", color: "blue"}}>*Location coordinates are approximate 
 					<br></br>
 					*Sunset time might not be exact.
+					<br></br>
+					*Temperatures are shown in °C
 				</p>
-				<label>Select City
+				<label className='header-left' style={{ border: "none" }}>Select City
 					<select id="select-box" onChange={
 						(e) => {
 							console.log("Selected value: ", e.target.value);
 							getLocation(
-								cities[e.target.value].lat, 
-								cities[e.target.value].lon, 
-								cities[e.target.value].tz
+								cities[ e.target.value ].lat, 
+								cities[ e.target.value ].lon, 
+								cities[ e.target.value ].tz
 							);
 							setCity(e.target.value);
+							console.log(all_data);
 						}
 					}>
-						{options}
+						{ options }
 					</select>
 				</label>
 			</div>
@@ -154,6 +154,8 @@ function App() {
 				sunset 			= { all_data.current.sunset }
 				iconCode		= { all_data.current.iconCode }
 				location		= { city }
+				localTime		= { localTime }
+				tz				= { timezone }
 			/>
 			<DaySection />
 			<HourSection />
