@@ -4,9 +4,8 @@ import Header from './Header'
 import DaySection from './DaySection'
 import HourSection from './HourSection'
 import { getWeather } from './weather'
-import cities from './data.json'
-import { all } from 'axios'
-// import cities from './data_sample.json'
+// import cities from './data.json'
+import cities from './data_sample.json'
 
 // Default location - Abuja, Nigeria
 const latitude = cities["Abuja"].lat; // myLocation.lat;
@@ -35,9 +34,9 @@ const longitude = cities["Abuja"].lon; //myLocation.lon;
 // );
 
 function App() {
-
+	// Initialize variables
 	const keys_cities = Object.keys(cities);
-	const options = []; // options for select html element at top of page
+	const options = []; // options for select element at top of page
 
 	const [city, setCity] 			= useState('Select location');
 	const [localTime, setLocalTime] = useState('--:--');
@@ -52,14 +51,23 @@ function App() {
 			sunset: "--:--",
 			uvIndex: "--",
 			windSpeed: "--"
-		}
+		},
+		daily: [
+			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
+			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
+			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
+			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
+			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
+			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
+			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
+		]
 	});
 
 	function setSunsetToLocale(currentSunset, tz) {
 		if(currentSunset[0] == "-") {
 			return "0";
  		} else {
-			console.log("The RESOLVE sunset TIME: ", currentSunset);
+			// console.log("The RESOLVE sunset TIME: ", currentSunset);
 			let idx 	 = 1;
 			let hours 	 = "";
 			let minutes  = "";
@@ -93,6 +101,7 @@ function App() {
 		.then((res) => {
 			res.current.sunset = setSunsetToLocale(res.current.sunset, tz)
 			setAll_data(res);
+			console.log(res);
 		})
 		.catch(e => {
 			console.error(e);
@@ -104,7 +113,7 @@ function App() {
 	}
 
 	// Add options to select tag from "data_sample.json" AKA "cities"
-	keys_cities.map((city) => {
+	keys_cities.forEach((city) => {
 		options.push(
 			<option value={city} key={city}>
 				{city}
@@ -120,7 +129,7 @@ function App() {
 	return (
 		<>
 			<div id='city-selector'>
-				<p style={{fontSize: "11px", color: "blue"}}>*Location coordinates are approximate 
+				<p style={{ fontSize: "11px", color: "blue" }}>*Location coordinates are approximate 
 					<br></br>
 					*Sunset time might not be exact.
 					<br></br>
@@ -129,14 +138,14 @@ function App() {
 				<label className='header-left' style={{ border: "none" }}>Select City
 					<select id="select-box" onChange={
 						(e) => {
-							console.log("Selected value: ", e.target.value);
+							// console.log("Selected value: ", e.target.value);
 							getLocation(
 								cities[ e.target.value ].lat, 
 								cities[ e.target.value ].lon, 
 								cities[ e.target.value ].tz
 							);
 							setCity(e.target.value);
-							console.log(all_data);
+							// console.log(e.target.value);
 						}
 					}>
 						{ options }
@@ -157,7 +166,9 @@ function App() {
 				localTime		= { localTime }
 				tz				= { timezone }
 			/>
-			<DaySection />
+			<DaySection
+				days = { all_data.daily }
+			/>
 			<HourSection />
 		</>
 	)

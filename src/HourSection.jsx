@@ -1,5 +1,7 @@
-function HourSection() {
+import { icons } from './weather'
 
+function HourSection() {
+	
 	return(
 		<table className="hour-section">
 			<tbody datahoursection="true">

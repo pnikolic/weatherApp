@@ -124,13 +124,14 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border: 1px solid hsl(200, 100%, 10%);
-	border-radius: 0.25rem;
+	/* border: 1px solid hsl(200, 100%, 10%); */
+	border-radius: 1rem;
 	padding: 0.25rem;
 }
 
 .day-card-day {
-	font-size: 0.75rem;
+	/* font-weight: bold; */
+	font-size: 0.8rem;
 	color: hsl(200, 100%, 20%);
 	margin-top: 0.5rem;
 }
@@ -142,11 +143,11 @@ body {
 }
 
 .hour-row {
-	background-color: hsl(200, 60%, 75%);
+	background-color: hsl(200, 90%, 60%); /*hsl(200, 90%, 60%)*/
 }
 
 .hour-row:nth-child(2n) {
-	background-color: hsl(200, 60%, 70%);
+	background-color: hsl(200, 90%, 70%);
 }
 
 .hour-row > td {

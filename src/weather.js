@@ -68,7 +68,7 @@ export function getWeather(lat, lon, timezone) {
 		return {
 			current: parseCurrentWeather(data),
 			daily: parseDailyWeather(data),
-			// hourly: parseHourlyWeather(data)
+			hourly: parseHourlyWeather(data)
 		}
 	})
 }
@@ -92,9 +92,8 @@ function parseCurrentWeather({ current, daily }) {
 	let hour   = sunset_date.getHours();
 	let minute = sunset_date.getMinutes();
 
-	console.log("Sunset, local time: ", new Date(sunset*1000).toLocaleString("en-US", {timeZone: "Africa/Lagos"}));
-
-	console.log("sunset_date: ", sunset_date)	
+	// console.log("Sunset, local time: ", new Date(sunset*1000).toLocaleString("en-US", {timeZone: "Africa/Lagos"}));
+	// console.log("sunset_date: ", sunset_date)	
 
 	if(minute < 10) {
 		minute = '0' + minute.toString();
@@ -118,9 +117,10 @@ function parseCurrentWeather({ current, daily }) {
 function parseDailyWeather({ daily }) {
 	return daily.time.map((time, index) => {
 		return {
-			timestamp: time * 1000, //to miliseconds
-			iconCode: daily.weathercode[index],
+			timestamp: new Date(time * 1000).getDay(), // to miliseconds, then get day (integer)
+			iconCode: daily.weathercode[index], // integer
 			maxTemp: Math.round(daily.temperature_2m_max[index]),
+			minTemp: Math.round(daily.temperature_2m_min[index]),
 		}
 	})
 }
@@ -128,7 +128,7 @@ function parseDailyWeather({ daily }) {
 function parseHourlyWeather({ hourly, current }) {
 	return hourly.time.map((time, index) => {
 		return {
-			timestamp: time * 1000, //to miliseconds
+			timestamp: new Date(time * 1000).getHours(), //to miliseconds, then 
 			iconCode: hourly.weathercode[index],
 			temp: Math.round(hourly.temperature_2m[index]),
 			precip: Math.round(hourly.precipitation[index] * 100) / 100,

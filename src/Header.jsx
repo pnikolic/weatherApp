@@ -26,8 +26,6 @@ function Header(props) {
 	// Check if local time is past sunset time
 	if(localHour >= sunsetHour) {
 		if((localHour > sunsetHour) || (localMin >= sunsetMin)) {
-			console.log("Hours true?", localHour > sunsetHour)
-			console.log("Mins true?", localMin >= sunsetMin)
 			icons[0] = 'src/icons/night.svg';
 			icons[1] = 'src/icons/cloudy-night-2.svg';
 			icons[2] = 'src/icons/cloudy-night-2.svg';
@@ -35,8 +33,6 @@ function Header(props) {
 			icons[45] = 'src/icons/fog-night.svg';
 		}
 	}
-
-	console.log("weather code: ", props.iconCode);
 
 	return (
 		<header className='header'>
