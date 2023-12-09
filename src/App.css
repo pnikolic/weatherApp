@@ -109,7 +109,7 @@ body {
 
 .value-sub-info {
 	font-weight: lighter;
-	font-size: 0.75rem;
+	font-size: 0.65rem;
 }
 
 .day-section {
@@ -136,6 +136,10 @@ body {
 	margin-top: 0.5rem;
 }
 
+.day-temp {
+	font-size: 1.2rem;
+}
+
 .hour-section {
 	width: 100%;
 	text-align: center;
@@ -143,11 +147,11 @@ body {
 }
 
 .hour-row {
-	background-color: hsl(200, 90%, 60%); /*hsl(200, 90%, 60%)*/
+	background-color:  hsl(200, 100%, 92.5%); /* hsl(200, 90%, 70%); */    /*hsl(200, 90%, 60%)*/
 }
 
 .hour-row:nth-child(2n) {
-	background-color: hsl(200, 90%, 70%);
+	background-color: hsl(200, 100%, 85%); /* hsl(200, 90%, 70%) */
 }
 
 .hour-row > td {

@@ -128,7 +128,7 @@ function parseDailyWeather({ daily }) {
 function parseHourlyWeather({ hourly, current }) {
 	return hourly.time.map((time, index) => {
 		return {
-			timestamp: new Date(time * 1000).getHours(), //to miliseconds, then 
+			timestamp: new Date(time * 1000), //to miliseconds, then 
 			iconCode: hourly.weathercode[index],
 			temp: Math.round(hourly.temperature_2m[index]),
 			precip: Math.round(hourly.precipitation[index] * 100) / 100,

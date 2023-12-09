@@ -35,6 +35,10 @@ const longitude = cities["Abuja"].lon; //myLocation.lon;
 
 function App() {
 	// Initialize variables
+	const templateDate = new Date();
+	const templateHours = templateDate.getHours();
+	const templateDay = templateDate.getDay();
+
 	const keys_cities = Object.keys(cities);
 	const options = []; // options for select element at top of page
 
@@ -60,6 +64,15 @@ function App() {
 			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
 			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
 			{ timestamp: 0,	iconCode: 0, maxTemp: 0, minTemp: 0 },
+		],
+		hourly: [
+			{ timestamp: templateDate,	iconCode: 0, temp: "0", precip: "0", windSpeed: "0" },
+			{ timestamp: templateDate,	iconCode: 0, temp: "0", precip: "0", windSpeed: "0" },
+			{ timestamp: templateDate,	iconCode: 0, temp: "0", precip: "0", windSpeed: "0" },
+			{ timestamp: templateDate,	iconCode: 0, temp: "0", precip: "0", windSpeed: "0" },
+			{ timestamp: templateDate,	iconCode: 0, temp: "0", precip: "0", windSpeed: "0" },
+			{ timestamp: templateDate,	iconCode: 0, temp: "0", precip: "0", windSpeed: "0" },
+			{ timestamp: templateDate,	iconCode: 0, temp: "0", precip: "0", windSpeed: "0" },
 		]
 	});
 
@@ -101,7 +114,7 @@ function App() {
 		.then((res) => {
 			res.current.sunset = setSunsetToLocale(res.current.sunset, tz)
 			setAll_data(res);
-			console.log(res);
+			console.log(res); // Show what API returns
 		})
 		.catch(e => {
 			console.error(e);
@@ -121,6 +134,7 @@ function App() {
 		);
 	});
 
+	// On first load
 	useEffect(() => {
 		getLocation(latitude, longitude, cities["Abuja"].tz);
 		setCity('Abuja');
@@ -135,7 +149,7 @@ function App() {
 					<br></br>
 					*Temperatures are shown in °C
 				</p>
-				<label className='header-left' style={{ border: "none" }}>Select City
+				<label className='header-left' style={{ border: "none" , overflowX: "visible" }}>Select City
 					<select id="select-box" onChange={
 						(e) => {
 							// console.log("Selected value: ", e.target.value);
@@ -169,7 +183,9 @@ function App() {
 			<DaySection
 				days = { all_data.daily }
 			/>
-			<HourSection />
+			<HourSection 
+				hourly = { all_data.hourly }
+			/>
 		</>
 	)
 }

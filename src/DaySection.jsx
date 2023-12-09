@@ -1,9 +1,11 @@
 import { icons } from './weather'
+export const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function DaySection(props) {
-	const data = props.days;
+	// const data = props.days;
+	const today = new Date().getDay();
 	const dayCards = [];
-	const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	// const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	let dayName = "";
 	let bgColor = {};
 
@@ -15,14 +17,20 @@ function DaySection(props) {
 	icons[45] = 'src/icons/fog.svg';
 
 	props.days.forEach((day, idx) => {
-		if(idx == 0) {
-			dayName = "Yesterday";
-			bgColor = { backgroundColor: "hsl(200, 100%, 92.5%)" };
-		} else if(idx == 1) {
-			dayName = "Today"
-			bgColor = { backgroundColor: "hsl(0, 0%, 100%)", border: "1px solid hsl(200, 100%, 10%)"};
+		dayName = daysOfWeek[day.timestamp];
+
+		if(day.timestamp == today) {
+			console.log("today is:", daysOfWeek[today])
+		// }
+		
+		// if(idx == 0) {
+		// 	dayName = "Yesterday";
+		// 	bgColor = { backgroundColor: "hsl(200, 100%, 92.5%)" };
+		// } else if(idx == 1) {
+			// dayName = daysOfWeek[day.timestamp];
+			bgColor = { backgroundColor: "hsl(0, 0%, 100%)", border: "2px solid hsl(200, 100%, 10%)" };
 		} else {
-			dayName = daysOfWeek[day.timestamp];
+			
 			bgColor = { backgroundColor: "hsl(200, 100%, 92.5%)" };
 		}
 
@@ -30,7 +38,7 @@ function DaySection(props) {
 			<div key={ idx } className="day-card" style={ bgColor }>
 				<div className="day-card-day">{ dayName }</div>
 				<img className="weather-icon medium" src={ icons[day.iconCode] } />
-				<div>{ day.maxTemp }&deg;</div>
+				<div className='day-temp'>{ day.maxTemp }&deg;</div>
 			</div>
 		);
 	});
