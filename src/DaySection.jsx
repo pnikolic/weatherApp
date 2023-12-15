@@ -2,14 +2,13 @@ import { icons } from './weather'
 export const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function DaySection(props) {
-	// const data = props.days;
-	const today = new Date().getDay();
+	const todayDate = new Date();
+	const today = todayDate.getDay();
 	const dayCards = [];
-	// const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	let dayName = "";
 	let bgColor = {};
 
-	// Resetting icons, they are changed in Header component it is night time
+	// Resetting icons, they were changed in Header component it is night time
 	icons[0] = 'src/icons/day.svg';
 	icons[1] = 'src/icons/cloudy-day-2.svg';
 	icons[2] = 'src/icons/cloudy-day-2.svg';
@@ -21,16 +20,8 @@ function DaySection(props) {
 
 		if(day.timestamp == today) {
 			console.log("today is:", daysOfWeek[today])
-		// }
-		
-		// if(idx == 0) {
-		// 	dayName = "Yesterday";
-		// 	bgColor = { backgroundColor: "hsl(200, 100%, 92.5%)" };
-		// } else if(idx == 1) {
-			// dayName = daysOfWeek[day.timestamp];
 			bgColor = { backgroundColor: "hsl(0, 0%, 100%)", border: "2px solid hsl(200, 100%, 10%)" };
 		} else {
-			
 			bgColor = { backgroundColor: "hsl(200, 100%, 92.5%)" };
 		}
 
@@ -46,44 +37,8 @@ function DaySection(props) {
 	return (
 		<section className="day-section">
 			{ dayCards }
-			{/* <div className="day-card">
-				<img className="weather-icon medium" src='src/icons/cloudy.svg' />
-				<div className="day-card-day">Monday</div>
-				<div>15&deg;</div>
-			</div>
-			<div className="day-card">
-				<img className="weather-icon medium" src='src/icons/cloudy.svg' />
-				<div className="day-card-day">Tuesday</div>
-				<div>15&deg;</div>
-			</div>
-			<div className="day-card">
-				<img className="weather-icon medium" src='src/icons/cloudy.svg' />
-				<div className="day-card-day">Wednesday</div>
-				<div>15&deg;</div>
-			</div>
-			<div className="day-card">
-				<img className="weather-icon medium" src='src/icons/cloudy.svg' />
-				<div className="day-card-day">Thursday</div>
-				<div>15&deg;</div>
-			</div>
-			<div className="day-card">
-				<img className="weather-icon medium" src='src/icons/cloudy.svg' />
-				<div className="day-card-day">Friday</div>
-				<div>15&deg;</div>
-			</div>
-			<div className="day-card">
-				<img className="weather-icon medium" src='src/icons/cloudy.svg' />
-				<div className="day-card-day">Saturday</div>
-				<div>15&deg;</div>
-			</div>
-			<div className="day-card">
-				<img className="weather-icon medium" src='src/icons/cloudy.svg' />
-				<div className="day-card-day">Sunday</div>
-				<div>15&deg;</div>
-			</div> */}
+			
 		</section>
-
-		// <template></template>
 	)
 }
 

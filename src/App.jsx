@@ -7,12 +7,6 @@ import { getWeather } from './weather'
 // import cities from './data.json'
 import cities from './data_sample.json'
 
-// Default location - Abuja, Nigeria
-const latitude = cities["Abuja"].lat; // myLocation.lat;
-const longitude = cities["Abuja"].lon; //myLocation.lon;
-// const latitude = 9.0244164; // myLocation.lat;
-// const longitude = 7.367465; //myLocation.lon;
-
 // function success(position) {
 // 	// latitude = position.coords.latitude;
 // 	// longitude = position.coords.longitude;
@@ -36,15 +30,12 @@ const longitude = cities["Abuja"].lon; //myLocation.lon;
 function App() {
 	// Initialize variables
 	const templateDate = new Date();
-	const templateHours = templateDate.getHours();
-	const templateDay = templateDate.getDay();
-
 	const keys_cities = Object.keys(cities);
 	const options = []; // options for select element at top of page
 
-	const [city, setCity] 			= useState('Select location');
+	const [city, setCity] 			= useState();
 	const [localTime, setLocalTime] = useState('--:--');
-	const [timezone, setTimezone] 	= useState('America/Los_Angeles');
+	const [timezone, setTimezone] 	= useState();
 	const [all_data, setAll_data] 	= useState({
 		current: {
 			currentTemp: "--",
@@ -80,7 +71,6 @@ function App() {
 		if(currentSunset[0] == "-") {
 			return "0";
  		} else {
-			// console.log("The RESOLVE sunset TIME: ", currentSunset);
 			let idx 	 = 1;
 			let hours 	 = "";
 			let minutes  = "";
@@ -102,7 +92,6 @@ function App() {
 			date_new.setMinutes(minutes);
 
 			const value = new Intl.DateTimeFormat('en-US', {hour: "numeric", minute: "numeric", timeZone: tz}).format(date_new); 
-			// console.log("VALUE: ", value.substring(0, value.length-3));
 			return value;
 		}
 	}
@@ -110,16 +99,20 @@ function App() {
 	function getLocation(lat, lon, tz) {
 		const locationTime = new Intl.DateTimeFormat('en-US', {hour: "numeric", minute: "numeric", timeZone: tz}).format(new Date());
 		
-		getWeather(lat, lon, tz) /* Intl.DateTimeFormat().resolvedOptions().timeZone */ 
-		.then((res) => {
-			res.current.sunset = setSunsetToLocale(res.current.sunset, tz)
-			setAll_data(res);
-			console.log(res); // Show what API returns
-		})
-		.catch(e => {
-			console.error(e);
-			alert("Error getting weather.");
-		});
+		try {
+			getWeather(lat, lon, tz)
+			.then((res) => {
+				res.current.sunset = setSunsetToLocale(res.current.sunset, tz)
+				setAll_data(res);
+				console.log(res); // Show what API returns
+			})
+			.catch(e => {
+				console.error(e);
+				alert("Error getting weather.");
+			});
+		} catch(e) {
+			alert("Error getting weather: " + e);
+		}
 
 		setTimezone(tz);
 		setLocalTime(locationTime);
@@ -136,8 +129,11 @@ function App() {
 
 	// On first load
 	useEffect(() => {
-		getLocation(latitude, longitude, cities["Abuja"].tz);
-		setCity('Abuja');
+		const storedCity = window.localStorage.getItem('city') != null ? JSON.parse(window.localStorage.getItem('city')) : "Abuja";
+		getLocation(cities[storedCity].lat, cities[storedCity].lon, cities[storedCity].tz);
+		setCity(storedCity);
+		document.getElementById('select-box').value = storedCity;
+		console.log(document.getElementById('select-box').value)
 	}, []);
 
 	return (
@@ -152,14 +148,13 @@ function App() {
 				<label className='header-left' style={{ border: "none" , overflowX: "visible" }}>Select City
 					<select id="select-box" onChange={
 						(e) => {
-							// console.log("Selected value: ", e.target.value);
 							getLocation(
 								cities[ e.target.value ].lat, 
 								cities[ e.target.value ].lon, 
 								cities[ e.target.value ].tz
 							);
 							setCity(e.target.value);
-							// console.log(e.target.value);
+							window.localStorage.setItem('city', JSON.stringify(e.target.value));
 						}
 					}>
 						{ options }
@@ -180,12 +175,8 @@ function App() {
 				localTime		= { localTime }
 				tz				= { timezone }
 			/>
-			<DaySection
-				days = { all_data.daily }
-			/>
-			<HourSection 
-				hourly = { all_data.hourly }
-			/>
+			<DaySection	 days = { all_data.daily } />
+			<HourSection hourly = { all_data.hourly } />
 		</>
 	)
 }
