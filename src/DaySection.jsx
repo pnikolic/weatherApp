@@ -9,11 +9,11 @@ function DaySection(props) {
 	let bgColor = {};
 
 	// Resetting icons, they were changed in Header component it is night time
-	icons[0] = 'src/icons/day.svg';
-	icons[1] = 'src/icons/cloudy-day-2.svg';
-	icons[2] = 'src/icons/cloudy-day-2.svg';
-	icons[3] = 'src/icons/cloudy.svg';
-	icons[45] = 'src/icons/fog.svg';
+	icons[0] = '/icons/day.svg';
+	icons[1] = '/icons/cloudy-day-2.svg';
+	icons[2] = '/icons/cloudy-day-2.svg';
+	icons[3] = '/icons/cloudy.svg';
+	icons[45] = '/icons/fog.svg';
 
 	props.days.forEach((day, idx) => {
 		dayName = daysOfWeek[day.timestamp];
