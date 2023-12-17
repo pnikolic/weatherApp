@@ -15,20 +15,20 @@ function Header(props) {
 	}
 	
 	// Reset icons to day time icons
-	icons[0] = '/icons/day.svg';
-	icons[1] = '/icons/cloudy-day-2.svg';
-	icons[2] = '/icons/cloudy-day-2.svg';
-	icons[3] = '/icons/cloudy.svg';
-	icons[45] = '/icons/fog.svg';
+	icons[0] = './icons/day.svg';
+	icons[1] = './icons/cloudy-day-2.svg';
+	icons[2] = './icons/cloudy-day-2.svg';
+	icons[3] = './icons/cloudy.svg';
+	icons[45] = './icons/fog.svg';
 
 	// Check if local time is past sunset time
 	if(localHour >= sunsetHour) {
 		if((localHour > sunsetHour) || (localMin >= sunsetMin)) {
-			icons[0] = '/icons/night.svg';
-			icons[1] = '/icons/cloudy-night-2.svg';
-			icons[2] = '/icons/cloudy-night-2.svg';
-			icons[3] = '/icons/cloudy-night-2.svg';
-			icons[45] = '/icons/fog-night.svg';
+			icons[0] = './icons/night.svg';
+			icons[1] = './icons/cloudy-night-2.svg';
+			icons[2] = './icons/cloudy-night-2.svg';
+			icons[3] = './icons/cloudy-night-2.svg';
+			icons[45] = './icons/fog-night.svg';
 		}
 	}
 
